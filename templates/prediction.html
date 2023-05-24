@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='prediction_styles.css') }}">
+  </head>
+
+  <body>
+    <div class="prediction">
+      <div class="predictData">
+        <p>Boston Marathon Time Predictor</p> 
+        <form id="predictionForm" action="{{ url_for('data')}}" method="post" >
+          <fieldset>
+            <label for="fivekMins">5K Time (MM:SS):</label>
+            <input type="number" id="fivekMins" name="fivekMins" placeholder="Minutes" required min=0 max="59" minlength="2">
+            <input type="number" id="fivekSeconds" name="fivekSeconds" placeholder="Seconds" required min="0" max="59"><br><br>
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" min="18" max="110" required placeholder="Age"><br><br>
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender">
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </select><br><br>
+            <input type="submit" value="Submit" id="submitBtn">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="predictData">
+      <p id="result"></p>
+    </div>
+    <div id="predictionText"></div>
+    <script>
+      const predicted_time = JSON.parse('{{predicted_time|safe}}');
+      const five_k_mins = JSON.parse('{{five_k_mins|safe}}');
+      const five_k_seconds = JSON.parse('{{five_k_seconds|safe}}');
+      const age = JSON.parse('{{age|safe}}');
+      const gender = JSON.parse('{{gender|safe}}');
+      document.getElementById('result').innerHTML = "Result:"
+      document.getElementById('predictionText').innerHTML = "Based on your data as a " + age + " year old " + gender + " with a 5K Best of "
+       + five_k_mins + ":" + five_k_seconds * 60 + ", your predicted Boston Marathon finish time is " + predicted_time; 
+    </script>
+  </body>
+</html>

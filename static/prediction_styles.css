@@ -1,0 +1,44 @@
+
+body {
+  background-color: black;
+}
+
+#predictionText {
+  color: white;
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.predictData p {
+  font-size: 25px;
+  color: white;
+}
+.prediction {
+  color: white;
+}
+
+.prediction fieldset {
+  padding: 15px;
+  border-radius: 10px;
+  border-color: #FFED00;
+  border-style: ridge;
+  border-width: 10px;
+  width: fit-content;
+  margin-bottom: 15px;
+}
+
+.prediction input {
+  border-radius: 10px;
+  height: 20px;
+  width: 125px
+}
+
+.prediction label {
+  width: 140px;
+  font-family: sans-serif;
+}
+
+.prediction select {
+  border-radius: 10px;
+  padding: 2px;
+}

@@ -1,0 +1,276 @@
+body {
+   /* background-color: #162F77
+   background-color: #FFDE00; */
+   /* background-color: white; */
+   /* background-image: linear-gradient(to bottom right, red, yellow); */
+   background-image: linear-gradient(to bottom right, rgb(0,0,0), rgb(0, 0, 0));
+}
+
+.nav-bar {
+  font-size: 1em;
+  padding: 10px 30px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  transition: 0.2s;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: sans-serif;
+}
+
+a:hover {
+  letter-spacing: 6px;
+}
+
+.nav-bar img {
+    height: 1.5rem;
+}
+
+.nav-bar p {
+  font-size: 40px;
+  font-weight: bold;
+  margin: auto;
+}
+
+.nav-bar p:hover {
+  letter-spacing: 6px;
+}
+
+#back {
+  background-color: #162F77;
+  border-radius: 25px;
+  border-width: 5px;
+  border-color: #FFDE00;
+  border-style: groove;
+  padding: 10px;
+}
+
+a {
+  font-size: 1em;
+  padding: 10px 0px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: 2px;
+  transition: 0.2s;
+  padding-bottom: 10px;
+  align-items: center;
+  display: flex;
+}
+
+
+.chartLeft {
+  display: flex;
+  justify-content: flex-start;
+  height: max-content
+}
+
+.chartRight {
+  display: flex;
+  justify-content: flex-end;
+  height: 500px;
+}
+
+#canvas {
+  height: 600px !important; 
+  width: 1200px !important;
+}
+
+.worldChart {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.lineChart {
+  height: 500px;
+}
+
+.chartCard {
+  height: 750px;
+  /* display: flex; */
+  /* justify-content: space-between; */
+}
+
+#submitBtn {
+  padding: 3px;
+  float: right;
+  height: 25px;
+  width: 100px;
+  font-size: 16px;
+}
+
+.predictData {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.predictData p {
+  font-size: 20px;
+  font-family: sans-serif;
+}
+
+.chartCardTest {
+  height: 600px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#doughnutChart {
+  height: 750px;
+  width: 750px;
+}
+
+#pieChart {
+  height: 600px !important;
+  width: 600px !important;
+}
+
+#barChart {
+  height: 600px !important;
+  width: 600px !important;
+}
+
+#rf_reg {
+  height: 600px !important;
+  width: 900px !important;
+}
+
+.rf_reg_container {
+  display: flex;
+  height: 600px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+/* Dropdown Button */
+.dropbtn {
+  background-color: #162F77;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.predictTimeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 25rem;
+}
+
+.predictTimeBackBtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 25rem;
+}
+
+.predictTimeBtn button {
+  background-color: #162F77;
+  border-radius: 25px;
+  border-width: 5px;
+  border-color: #FFDE00;
+  border-style: groove;
+}
+
+.prediction {
+  display: flex;
+  align-items: center;
+  color: white
+}
+
+#predChart {
+  height: 600px !important;
+  width: 900px !important;
+}
+label {
+  padding-right: 10px;
+}
+
+.back-button p {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  align-items: center;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+#titlecheck {
+  color: white;
+  font-size: 25px;
+  font-family: sans-serif;
+  margin-top: 80px;
+}
+
+.dropdown-content-reg {
+  background-color: #162F77;
+  border-radius: 25px;
+  border-width: 5px;
+  border-color: #FFDE00;
+  border-style: groove;
+  color: white;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: 20px;
+  
+  /* background-color: white;
+  box-shadow: 0px 8px 16px 0px rgb(255, 222, 0);
+  z-index: 1;
+  border-radius: 15px;
+  padding: 10px;
+  border-style: hidden;
+  margin-left: 40px;
+  margin-right: 40px;
+  font-size: 20px; */
+}
+
+.reg_container {
+  display: flex;
+  height: 600px;
+  align-items: center;
+}
+
+#regChart {
+  height: 600px !important;
+  width: 900px !important;
+  margin-right: 20px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #FFDE00;}
+

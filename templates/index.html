@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <section class="showcase">
+            <header>
+              <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+            </header>
+            <!--Video Source: https://www.videvo.net/video/marathon-runners-slow-motion/4542/ -->
+            <video src="{{ url_for('static', filename='running_video.mov') }}" playsinline autoplay muted loop></video>
+            <div class="overlay"></div>
+            <div class="text"> 
+              <h2 id="boston">Boston&nbsp;</h2><h2 id="marathon">Marathon</h2> 
+              <h3>Data Analysis</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+              consequat.</p>
+              <a href="{{ url_for('data') }}">Show me the data!</a>
+            </div>
+          </section>
+        </div>
+    </body>
+</html>
+  
+  
+  

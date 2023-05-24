@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='data_styles.css') }}">
+    </head>
+    <body>
+        <nav class="nav-bar">
+          <div class="predictTimeBackBtn">
+            <a id="back" href="{{ url_for('home') }}">Back</a>
+          </div>  
+          <p>2023 Boston Marathon Analysis</p>
+          <div class="predictTimeBtn">
+            <button><a type="button" href="{{url_for('predict')}}">Predict my marathon time!</a></button>
+          </div>
+        </nav>
+        <hr>
+        <div id="titlecheck">WORLD DATA</div>
+        <hr>
+        <div class="worldChart">
+          <canvas id="canvas"></canvas>
+        </div>
+        
+        <script src='https://unpkg.com/chart.js@4'></script>
+        <script src='https://unpkg.com/chartjs-chart-geo@4'></script>
+
+        <script>
+          countriesData = JSON.parse('{{countriesData|safe}}');
+          athletesData = JSON.parse('{{athletes|safe}}');
+          countriesData[107] = 'United States of America';
+
+          testData = countriesData.concat(athletesData);
+          console.log(countriesData);
+          fetch('https://unpkg.com/world-atlas/countries-50m.json').then(r => r.json()).then(data => {
+            const countries = ChartGeo.topojson.feature(data, data.objects.countries).features;
+            Chart.defaults.color = 'rgb(255,255,255)'
+            let randomData = countries.map(d => ({ feature: d, value: athletesData[countriesData.indexOf(d.properties.name)] ? athletesData[countriesData.indexOf(d.properties.name)]: 0}));
+            const chart = new Chart(document.getElementById("canvas").getContext("2d"), {
+              type: 'choropleth',
+              data: {
+                labels: countries.map(d => d.properties.name),
+                datasets: [{
+                  label: 'Countries',
+                  data: randomData,
+                  borderColor: 'rgb(255,255,255)',
+                  }] },
+              options: {
+                showline: true,
+                plugins: {
+                  legend: {
+                    display: false,
+                    position: 'left'
+                    },
+                    title: {
+                      display: true,
+                      text: 'Number of Runners By Country',
+                      padding: {
+                          top: 25,
+                          bottom: 20
+                      },
+                      font: {
+                        size: 35,
+                      },
+                  } },
+                animation: false,
+                scales: {
+                  projection: {
+                    axis: 'x',
+                    projection: 'equalEarth' },
+                  color: {
+                    axis: 'x',
+                    interpolate: 'cividis',
+                    display: true,
+                    max: 250,
+                    min: 0,
+                    ticks: {
+                      stepSize: 10,
+                    }
+                  }
+                  } } });      
+          });
+        </script>
+
+        <div id="titlecheck">GENERAL STATISTICS</div>
+        <hr>
+        <div class="chartCardTest">
+            <canvas id="barChart"></canvas>
+            <canvas id="pieChart"></canvas>
+        </div>
+        
+        <script>
+            const bar = document.getElementById('barChart');
+            const columns = JSON.parse('{{columns|safe}}');
+            const men_data = JSON.parse('{{men_data|safe}}');
+            const women_data = JSON.parse('{{women_data|safe}}');
+            Chart.defaults.color = 'rgb(255,255,255)'
+            new Chart(bar, {
+            type: 'bar',
+            data: {
+                labels: columns,
+                datasets: [{
+                label: 'Total Men',
+                data: men_data,
+                borderWidth: 1,
+                minBarLength: 1.5,
+                backgroundColor: 'rgb(22, 47, 119)',
+                },
+                {
+                label: 'Total Women',
+                data: women_data,
+                borderWidth: 1,
+                minBarLength: 1.5,
+                backgroundColor: 'rgb(255, 222, 0)'
+                }]
+            },
+            options: {
+                aspectRatio: 1,
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                    title: {
+                      display: true,
+                      text: 'Number of Runners',
+                      font: {
+                        size: 15
+                      },
+                      padding: {
+                        top: 25,
+                        bottom: 25
+                      }
+                    }
+                  },
+                  x: {
+                    title: {
+                      display: true,
+                      text: 'Age Division',
+                      font: {
+                        size: 15
+                      },
+                      padding: {
+                        top: 25,
+                      }
+                    }
+                  }
+                },
+                animation: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Age Divisions by Gender',
+                        padding: {
+                            top: 75,
+                            bottom: 20
+                        },
+                        font: {
+                          size: 35
+                        }
+                    }
+                }
+            }
+            });
+
+            const pie = document.getElementById('pieChart');
+            const total_men = JSON.parse('{{total_men|safe}}');
+            const total_women = JSON.parse('{{total_women|safe}}');
+            const total_gender = [total_men, total_women]
+
+            new Chart(pie, {
+            type: 'pie',
+            data: {
+                labels: ['Male','Female'],
+                datasets: [{
+                label: 'Total Gender',
+                data: total_gender,
+                borderWidth: 1,
+                backgroundColor: ['rgb(22, 47, 119)',
+                                   'rgb(255, 222, 0)',
+                                  ],
+                }],
+            },
+            options: {
+                aspectRatio: 1,
+                scales: {
+                y: {
+                    beginAtZero: true,
+                    display: false
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: '',
+                    font: {
+                      size: 15
+                    },
+                    padding: {
+                      top: 25,
+                    }
+                  },
+                  ticks: {
+                    display: false
+                  }
+                }
+                },
+                animation: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Runners by Gender',
+                        padding: {
+                            top: 75,
+                            bottom: 20
+                        },
+                        font: {
+                          size: 35,
+                        }
+                    }
+                }
+            }
+            });
+        </script>
+        <div id="titlecheck">MACHINE LEARNING REGRESSION</div>
+        <hr>
+        <div class="rf_reg_container">
+          <canvas id="rf_reg"></canvas>
+          <div class="dropdown-content-reg">The Random Forest Regression model was trained on 17,559 randomly selected results and tested on 8,767; all from 2023.
+            The model boasts a 95.4% accurate prediction based on runners' age, gender, and an estimated best 5K time</div>
+        </div>
+        <script>
+          const rf_reg = document.getElementById('rf_reg');
+          const real_values = JSON.parse('{{full_values|safe}}');
+          const pred_values = JSON.parse('{{pred_values|safe}}');
+          const top_one_percent = real_values.slice(0, 260);
+          
+          const rf = new Chart(rf_reg, {
+            type: 'scatter',
+            data: {
+              datasets: [{
+                label: "Actual Time",
+                data: real_values,
+                borderWidth: 1,
+                borderColor: '#FFDE00',
+                order: 2,
+                backgroundColor: '#FFDE00'
+              }, {
+                label: 'Predicted Time',
+                type: 'line',
+                data: pred_values,
+                borderWidth: 1,
+                borderColor: '#162F77',
+                order: 1,
+                backgroundColor: '#162F77',
+              },
+              ]
+            },
+            showline: true,
+            options: {
+              aspectRatio: 1.5,
+              animation: false,
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Random Forest Regression of all Runners',
+                  padding: {
+                      top: 10,
+                      bottom: 30
+                  },
+                  font: {
+                    size: 35
+                  }
+                }
+              },
+              animation: false,
+              scales: {
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Full Marathon Time (mins)',
+                    font: {
+                      size: 20
+                    },
+                    padding: {
+                      top: 25,
+                      bottom: 25
+                    }
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: '5K Time (mins)',
+                    font: {
+                      size: 20
+                    },
+                    padding: {
+                      top: 25,
+                      bottom: 25
+                    }
+                  }
+                }
+              }
+            }
+          });
+          rf.update()
+        </script>
+
+        <div class="reg_container">
+          <div class="dropdown-content-reg">The Linear Regression model was trained on 17,559 randomly selected results and tested on 8,767; all from 2023.
+            The model has a slightly better prediction accuracy at 95.8% based on runners' age, gender, and an estimated best 5K time. 
+          </div>
+          <canvas id="regChart"></canvas>
+        </div>
+          
+          
+        <script>
+          const reg = document.getElementById('regChart');
+          const lr_pred_values = JSON.parse('{{lr_pred_values|safe}}');
+          const lr_real_values= JSON.parse('{{lr_real_values|safe}}');
+
+          const regr = new Chart(reg, {
+            type: 'scatter',
+            data: {
+              datasets: [{
+                label: "Actual Time",
+                data: lr_real_values,
+                borderWidth: 1,
+                borderColor: 'rgb(255, 222, 0)',
+                order: 2,
+                backgroundColor: 'rgb(255, 222, 0)'
+              }, {
+                label: 'Predicted Time',
+                type: 'line',
+                data: lr_pred_values,
+                borderWidth: 1,
+                borderColor: '#162F77',
+                order: 1,
+                backgroundColor: '#162F77',
+              },
+              ]
+            },
+            showline: true,
+            options: {
+              aspectRatio: 1.5,
+              scales: {
+                y: {
+                  title: {
+                    display: true,
+                    text: 'Full Marathon Time (mins)',
+                    font: {
+                      size: 20
+                    },
+                    padding: {
+                      top: 25,
+                      bottom: 25
+                    }
+                  }
+                },
+                x: {
+                  title: {
+                    display: true,
+                    text: '5K Time (mins)',
+                    font: {
+                      size: 20
+                    },
+                    padding: {
+                      top: 25,
+                      bottom: 25
+                    }
+                  }
+                }
+              },
+              animation: false,
+              plugins: {
+                title: {
+                    display: true,
+                    text: 'Linear Regression of all Runners',
+                    padding: {
+                        top: 75,
+                        bottom: 20
+                    },
+                    font: {
+                      size: 35
+                    }
+                }
+            }
+            }
+          });
+          regr.update()
+        </script>
+    </body>
+</html>
