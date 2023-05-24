@@ -36,9 +36,9 @@ def home():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
-    df_countries = pd.read_csv('/Users/chasecollins/Documents/WGU Classes/C964-Capstone/BM_Data/2023_BM_Data/2023_BM_Country_Data.csv', index_col=0)
-    df_women = pd.read_csv('/Users/chasecollins/Documents/WGU Classes/C964-Capstone/BM_Data/2023_BM_Data/2023_BM_Female_Data.csv', index_col=0)
-    df_men = pd.read_csv('/Users/chasecollins/Documents/WGU Classes/C964-Capstone/BM_Data/2023_BM_Data/2023_BM_Male_Data.csv', index_col=0)
+    df_countries = pd.read_csv('data/2023_BM_Country_Data.csv', index_col=0)
+    df_women = pd.read_csv('data/2023_BM_Female_Data.csv', index_col=0)
+    df_men = pd.read_csv('data/2023_BM_Male_Data.csv', index_col=0)
 
     countries = df_countries['Country_Name'].unique().tolist()
     athletes = df_countries['Num_Athletes'].values.tolist()
