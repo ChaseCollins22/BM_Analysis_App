@@ -32,9 +32,10 @@ a:hover {
 }
 
 .nav-bar p {
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   margin: auto;
+  text-align: center;
 }
 
 .nav-bar p:hover {
